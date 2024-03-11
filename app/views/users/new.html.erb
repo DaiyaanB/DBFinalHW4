@@ -1,17 +1,35 @@
+<!-- app/views/users/new.html.erb Edits from GPT 4.0 based on user story for logging in -->
+
 <h1>New User Account</h1>
 
-<form action="/users" method="post">
-  <p>
-    <label for="username">Username</label>
-    <input type="text" name="username" id="username">
-  </p>
-  <p>
-    <label for="email">Email</label>
-    <input type="text" name="email" id="email">
-  </p>
-  <p>
-    <label for="password">Password</label>
-    <input type="text" name="password" id="password">
-  </p>
-  <button>Signup</button>
-</form>
+<%= form_with model: @user, local: true do |form| %>
+  <% if @user.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@user.errors.count, "error") %> prevented this user from being saved:</h2>
+      <ul>
+        <% @user.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :username %>
+    <%= form.text_field :username, id: :user_username %>
+  </div>
+
+  <div class="field">
+    <%= form.label :email %>
+    <%= form.email_field :email, id: :user_email %>
+  </div>
+
+  <div class="field">
+    <%= form.label :password %>
+    <%= form.password_field :password, id: :user_password %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit "Signup" %>
+  </div>
+<% end %>
