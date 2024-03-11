@@ -1,5 +1,4 @@
-<!--Written with help from GPT on logout functionality-->
-
+<!--With edits from GPT for the JS-->
 
 <!DOCTYPE html>
 <html>
@@ -8,18 +7,18 @@
   <%= csrf_meta_tags %>
   <%= csp_meta_tag %>
   <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
 </head>
 <body>
-  <div>
+  <nav>
     <% if logged_in? %>
       Logged in as: <%= current_user.username %> |
       <%= link_to 'Logout', logout_path, method: :delete %>
     <% else %>
       <%= link_to 'Login', login_path %> |
-      <%= link_to 'Signup', new_user_path %>
+      <%= link_to 'Signup', signup_path %>
     <% end %>
-  </div>
+  </nav>
 
   <%= yield %>
 </body>

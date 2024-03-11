@@ -2,7 +2,7 @@ source "https://rubygems.org"
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby "3.2.2"
-
+gem 'webpacker', '~> 5.x' # or a version compatible with your Rails version
 gem "rails", "~> 7.1.3"
 gem "puma", ">= 5.0"
 gem "bcrypt", "~> 3.1.7"

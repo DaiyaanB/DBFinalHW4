@@ -1,11 +1,14 @@
 class UsersController < ApplicationController
-  def new
-    @user = User.new
+  def current_user
+    @current_user ||= User.find_by(id: session[:user_id]) if session[:user_id]
   end
+  
+  
+def new
+    @user = User.new
+end
 
 # app/controllers/users_controller.rb Edits from GPT 4
-
-# app/controllers/users_controller.rb
 
 def create
   @user = User.new(user_params)
