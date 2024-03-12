@@ -13,7 +13,8 @@ class EntriesController < ApplicationController
   end
 
   def new
-    @entry = Entry.new
+    @place = Place.find(params[:place_id]) # Ensure you're retrieving the place_id from params
+    @entry = @place.entries.build
   end
 
   def edit

@@ -15,8 +15,11 @@ Rails.application.routes.draw do
 
   # Resources
   resources :entries
-  resources :places
   # Assuming you have a sessions controller for handling login
   resources :sessions, only: [:new, :create, :destroy]
   resources :users, only: [:new, :create]
+
+  resources :places do
+    resources :entries
+  end
 end

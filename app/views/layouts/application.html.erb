@@ -1,3 +1,4 @@
+<!--Views/Layouts/Application.html.erb-->
 <!--With edits from GPT for the JS-->
 
 <!DOCTYPE html>
@@ -6,20 +7,29 @@
   <title>Tacostagram Final</title>
   <%= csrf_meta_tags %>
   <%= csp_meta_tag %>
-  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-  <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+  <%= stylesheet_link_tag 'application', media: 'all' %>
 </head>
 <body>
+  <% flash.each do |type, message| %>
+    <div class="<%= type %>"><%= message %></div>
+  <% end %>
   <nav>
     <% if logged_in? %>
       Logged in as: <%= current_user.username %> |
-      <%= link_to 'Logout', logout_path, method: :delete %>
+      <%= button_to 'Logout', logout_path, method: :delete, form: {class: "inline"} %>
     <% else %>
-      <%= link_to 'Login', login_path %> |
-      <%= link_to 'Signup', signup_path %>
+      <!-- Only show the Signup link if NOT on the Signup page -->
+      <% unless controller_name == 'users' && action_name == 'new' %>
+        <%= link_to 'Signup', signup_path %>
+      <% end %>
+      <!-- Only show the Login link if NOT on the Login page and NOT on the Signup page -->
+      <% unless controller_name == 'sessions' && action_name == 'new' || controller_name == 'users' && action_name == 'new' %>
+        <%= link_to 'Login', login_path %>
+      <% end %>
     <% end %>
   </nav>
 
   <%= yield %>
 </body>
 </html>
+
